@@ -351,7 +351,7 @@ def activity():
         sql = db.cursor()
         sql.execute(f"SELECT created_at, ip, user_agent FROM activity_log WHERE username = ?", [current_user.id])
         activity = sql.fetchall()
-    activity_list = [(row[1], row[2], row[3]) for row in activity]
+    activity_list = [(row[0], row[1], row[2]) for row in activity]
     activity_list = [f"{row[0]} - {row[1]} - {row[2]}" for row in activity_list]
 
     return render_template("activity.html", activity_list=activity_list)
