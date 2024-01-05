@@ -276,7 +276,10 @@ def register():
 def update_activity_log(ip, user_agent):
     with sqlite3.connect(DATABASE) as db:
         cursor = db.cursor()
-        cursor.execute("INSERT INTO activity_log (ip, user_agent, username) VALUES (?,?,?)", [ip, user_agent, current_user.id])
+        cursor.execute(
+            "INSERT INTO activity_log (ip, user_agent, username) VALUES (?,?,?)",
+            [ip, user_agent, current_user.id],
+        )
         db.commit()
 
 
@@ -349,7 +352,10 @@ def notes():
 def activity():
     with sqlite3.connect(DATABASE) as db:
         sql = db.cursor()
-        sql.execute(f"SELECT created_at, ip, user_agent FROM activity_log WHERE username = ?", [current_user.id])
+        sql.execute(
+            f"SELECT created_at, ip, user_agent FROM activity_log WHERE username = ?",
+            [current_user.id],
+        )
         activity = sql.fetchall()
     activity_list = [(row[0], row[1], row[2]) for row in activity]
     activity_list = [f"{row[0]} - {row[1]} - {row[2]}" for row in activity_list]
