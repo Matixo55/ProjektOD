@@ -332,6 +332,7 @@ def admin():
     if request.method == "GET":
         return render_template("admin.html")
     if request.method == "POST":
+        time.sleep(random.random())
         return "Invalid login or password", HttpStatus.UNAUTHORIZED
 
 
