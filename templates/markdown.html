@@ -1,0 +1,27 @@
+<html>
+<body>
+<h1> Your rendered Markdown: </h1>
+{{ rendered |safe }}
+<br>
+{% if encrypted and not decoded %}
+<form action="{{ url_for('render_old', rendered_id=rendered_id) }}"  method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="password">Password: </label>
+    <input type="password" id="password" name="password"><br>
+    <input type="submit" value="Decode" />
+</form>
+{% endif %}
+{% if not encrypted and not decoded and not shared %}
+<form action="{{ url_for('share', note_id=rendered_id) }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="user">Share with: </label>
+    <input type="text" id="user" name="user" value="username"><br>
+    <input type="submit" value="Share"/>
+</form>
+
+{% endif %}
+<form action={{ url_for('notes') }}>
+  <input type="submit" value="Go back" />
+</form>
+</body>
+</html>

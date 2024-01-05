@@ -1,0 +1,32 @@
+<html>
+<body>
+<form action={{ url_for('register') }} method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="username">Username: </label>
+  <input type="text" id="username" name="username"><br>
+  <label for="email">Email: </label>
+  <input type="text" id="email" name="email"><br>
+  <label for="password">Password: </label>
+  <input type="password" id="password" name="password"><br>
+    {% if error_message %}
+      <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+  <input type="submit" value="Submit">
+</form>
+
+<a href="{{ url_for('home') }}" class="button">Homepage</a>
+  <div>
+    <strong>Password Requirements:</strong>
+    <ul>
+      <li>Minimum length: 12 characters</li>
+      <li>At least one uppercase letter</li>
+      <li>At least one lowercase letter</li>
+      <li>At least one digit</li>
+      <li>At least one special character (@_!#$%^&*()<>?/\|}{~:)</li>
+      <li>Avoid repeated phrases</li>
+    </ul>
+  </div>
+<button onclick="location.href='{{ url_for('home') }}'">Home</button>
+</body>
+</html>

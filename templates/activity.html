@@ -1,0 +1,16 @@
+<html>
+<body>
+<h1>Hello {{ username }}!</h1>
+<h2>Your last activity:</h2>
+
+<ul>
+    {% for item in activity_list %}
+        <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+
+<a href="{{ url_for('home') }}" class="button">Homepage</a>
+
+</body>
+</html>

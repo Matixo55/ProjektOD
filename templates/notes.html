@@ -1,0 +1,48 @@
+<html>
+<body>
+<h1>Hello {{ username }}!</h1>
+
+<form action={{ url_for('render') }} method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="markdown">Input some markdown:</label><br>
+  <textarea id="markdown" name="markdown" rows="20" cols="100"></textarea>
+  <br>
+    <input type="checkbox" id="encrypted" name="encrypted" value="checkbox">
+    <label for="encrypted">Use password?</label><br>
+    <label for="password">Password: </label>
+    <input type="password" id="password" name="password"><br>
+    {% if error_message %}
+      <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+  <input type="submit" value="Submit">
+</form>
+
+{% if notes|length > 0 %}
+<h1> Your notes: </h1>
+<ul>
+{% for item in notes %}
+  <li><a href="{{ url_for('render') }}/{{loop.index}}">{{ loop.index }}</a></li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+<form action={{ url_for('logout') }}>
+  <input type="submit" value="Log out" />
+</form>
+
+<a href="{{ url_for('home') }}" class="button">Homepage</a>
+
+ <div>
+    <strong>Password Requirements:</strong>
+    <ul>
+      <li>Minimum length: 12 characters</li>
+      <li>At least one uppercase letter</li>
+      <li>At least one lowercase letter</li>
+      <li>At least one digit</li>
+      <li>At least one special character (@_!#$%^&*()<>?/\|}{~:)</li>
+      <li>Avoid repeated phrases</li>
+    </ul>
+  </div>
+</body>
+</html>
