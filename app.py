@@ -263,7 +263,7 @@ def register():
             salt = secrets.token_hex(8)
             con.execute(
                 f"INSERT INTO user (username, password,email, salt, totp) VALUES (?,?,?,?,?)",
-                [username, sha256_crypt.hash(salt + password), email, salt, pyotp.random_base32()],
+                [username, sha256_crypt.using(min_rounds=99000, max_rounds=101000).hash(salt + password), email, salt, pyotp.random_base32()],
             )
             db.commit()
 
