@@ -27,7 +27,7 @@ import secrets
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-from base64 import urlsafe_b64decode, b64encode
+from base64 import urlsafe_b64decode
 from cryptography.hazmat.primitives import hashes
 
 app = Flask(__name__)
@@ -83,11 +83,10 @@ def init_db():
         sql.execute(
             "CREATE TABLE activity_log (id INTEGER PRIMARY KEY, username VARCHAR(32), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, ip VARCHAR(32), user_agent VARCHAR(256));"
         )
-
         # Password1234)
-        sql.execute(
-            f"INSERT INTO user (username, password, salt, totp, email) VALUES ('steve', '$5$rounds=535000$u1dEwt7ffnDsfO6M$EQrQidi1AsUxbOMGWSA5515/S0bSvXcDwc1FHcB0/1D', 'b1fd56a0b1a3ea03','{pyotp.random_base32()}', 'steve@gmail.com');"
-        )
+        # sql.execute(
+        #     f"INSERT INTO user (username, password, salt, totp, email) VALUES ('steve', '$5$rounds=535000$u1dEwt7ffnDsfO6M$EQrQidi1AsUxbOMGWSA5515/S0bSvXcDwc1FHcB0/1D', 'b1fd56a0b1a3ea03','{pyotp.random_base32()}', 'steve@gmail.com');"
+        # )
         db.commit()
 
 
